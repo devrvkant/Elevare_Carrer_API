@@ -8,6 +8,8 @@ import os
 app = Flask(__name__)
 
 cors_origins = os.getenv("CORS_ORIGINS", "*")
+if cors_origins != "*":
+    cors_origins = [origin.strip() for origin in cors_origins.split(",")]
 CORS(app, resources={r"/*": {"origins": cors_origins}})
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
